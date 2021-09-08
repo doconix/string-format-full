@@ -3,9 +3,10 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        "targets": "defaults",
+        targets: {
+          browsers: ["IE 11"],
+        },
       }
     ],
-  ],
-  "plugins": ["transform-class-properties"]
+  ]
 }

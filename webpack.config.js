@@ -14,5 +14,14 @@ module.exports = {
   },
   optimization: {
     minimize: process.env.MINIFY_ENABLED === '1'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
   }
 }

@@ -1,8 +1,9 @@
 // importing these files allows them to register with PyType
 import {PyString} from './PyString'
-import './PyInteger'
-import './PyFloat'
+import {PyInteger} from './PyInteger'
+import {PyFloat} from './PyFloat'
 
+export { PyString, PyInteger, PyFloat }
 
 /**
  * Primary exported function to format a string  using Python's .format() mini-language.

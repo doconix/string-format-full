@@ -1,12 +1,16 @@
-import {format, enableGlobal} from './src'
+import {
+    format,
+    enableGlobal,
+    PyString,
+    PyInteger,
+    PyFloat
+} from './src'
 
-// format.enableGlobal
-Object.defineProperty(format, 'enableGlobal', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: enableGlobal,
-})
+// attach less-used options under the default export
+format.enableGlobal = enableGlobal
+format.PyString = PyString
+format.PyInteger = PyInteger
+format.PyFloat = PyFloat
 
 // default export
 export default format

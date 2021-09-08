@@ -3547,6 +3547,7 @@ PyType.REGISTRY.PyInteger = PyInteger;
 
 
 
+
 /**
  * Primary exported function to format a string  using Python's .format() mini-language.
  * This is really just a wrapper around PyString.format.
@@ -3595,14 +3596,12 @@ function enableGlobal() {
   });
 }
 ;// CONCATENATED MODULE: ./index.js
- // format.enableGlobal
+ // attach less-used options under the default export
 
-Object.defineProperty(format, 'enableGlobal', {
-  enumerable: false,
-  configurable: false,
-  writable: false,
-  value: enableGlobal
-}); // default export
+format.enableGlobal = enableGlobal;
+format.PyString = PyString;
+format.PyInteger = PyInteger;
+format.PyFloat = PyFloat; // default export
 
 /* harmony default export */ const index = (format);
 __webpack_exports__ = __webpack_exports__["default"];

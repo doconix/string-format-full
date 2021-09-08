@@ -1,8 +1,9 @@
 # Description
 
-This is a full implementation of the Python formatting mini-language,
-implemented by transcoding the Jython Java code. By basing this on Jython's
-implementation, we get a full-featured, mature, robust codebase.
+A full implementation of the Python formatting mini-language, built on Jython project.
+
+Since Jython is a 20+ year-old codebase that has been tested and used throughout the world. This code has minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
+
 
 # Use
 
@@ -56,15 +57,6 @@ enableGlobalFormat()
 [See the tests for more examples](https://github.com/doconix/string-format-full/tree/main/tests)
 
 
-
-# Why Jython?
-
-I chose to transcode the Jython implementation rather than others like cython
-because Java and Javascript are syntactically similar--making for a very
-straighforward translation.
-
-Kudos and thanks to the Jython team! https://www.jython.org/
-
 # Benefits of this Approach
 
 1. Implements the full Python mini-language.
@@ -78,7 +70,7 @@ Kudos and thanks to the Jython team! https://www.jython.org/
 2. The module is likely slower than the smaller alternatives, although
    it probably won't matter to most projects.
 
-# Alternatives (2021)
+# Other Modules
 
 - [string-format-full](https://www.npmjs.com/package/string-format-full) (this module): 2900 lines of code
 - [string-format](https://www.npmjs.com/package/string-format): 300 lines of code

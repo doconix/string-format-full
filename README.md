@@ -54,7 +54,7 @@ enableGlobalFormat()
 "{:0.2f}".format(3.141597)
 ```
 
-[See the tests for more examples](https://github.com/doconix/string-format-full/tree/main/tests)
+See `tests/*` files for more examples.
 
 
 # Benefits of this Approach

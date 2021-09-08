@@ -1,0 +1,35 @@
+{
+  "name": "string-format-full",
+  "version": "1.0.0",
+  "description": "Python string formatting mini-language, transcoded from Jython. ",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doconix/string-format-full.git"
+  },
+  "keywords": [
+    "string",
+    "format",
+    "python",
+    "formatting"
+  ],
+  "author": "Conan C. Albrecht",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/doconix/string-format-full/issues"
+  },
+  "homepage": "https://github.com/doconix/string-format-full#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "babel-jest": "^27.1.1",
+    "chai": "^4.3.4",
+    "jest": "^27.1.1"
+  }
+}

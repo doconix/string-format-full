@@ -1,5 +1,5 @@
-import { format } from '../index'
-import { assert } from 'chai'
+import {format} from '../index'
+import {assert} from 'chai'
 
 
 // basic

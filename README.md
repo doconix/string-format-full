@@ -4,6 +4,7 @@ A full implementation of the Python formatting mini-language, built on Jython pr
 
 Since Jython is a 20+ year-old codebase that has been tested and used throughout the world. This code has minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
 
+Minified size: `21kb`
 
 # Use
 
@@ -45,16 +46,20 @@ format('{0[0].first} {0[0].second}', [
 
 If you prefer python-style:
 ```
-import format, {enableGlobalFormat} from 'string-format-full'
+import format from 'string-format-full'
 
 // patch String.prototype (run at start of code)
-enableGlobalFormat()
+format.enableGlobal()
 
 // "3.14"
 "{:0.2f}".format(3.141597)
 ```
 
 See `test/*` files for more examples.
+
+## Browser-based &lt;script src="..."&gt;
+
+See `browser.html`.
 
 
 # Benefits of this Approach
@@ -72,6 +77,5 @@ See `test/*` files for more examples.
 
 # Other Modules
 
-- [string-format-full](https://www.npmjs.com/package/string-format-full) (this module): 2900 lines of code
-- [string-format](https://www.npmjs.com/package/string-format): 300 lines of code
-- [python-format-js](https://www.npmjs.com/package/string-format-js): 163 lines of code
+- [string-format](https://www.npmjs.com/package/string-format)
+- [python-format-js](https://www.npmjs.com/package/string-format-js)

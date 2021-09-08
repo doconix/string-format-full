@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest"
+    "test": "node node_modules/jest/bin/jest.js",
+    "build": "node node_modules/webpack/bin/webpack.js; MINIFY_ENABLED=1 node node_modules/webpack/bin/webpack.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,8 @@
     "@babel/preset-env": "^7.15.4",
     "babel-jest": "^27.1.1",
     "chai": "^4.3.4",
-    "jest": "^27.1.1"
+    "jest": "^27.1.1",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0"
   }
 }

@@ -1,14 +1,7 @@
 // importing these files allows them to register with PyType
 import {PyString} from './PyString'
-import {PyInteger} from './PyInteger'
-import {PyFloat} from './PyFloat'
-import {MarkupIterator} from './MarkupIterator'
-import {
-    PyError,
-    FormatError,
-    IllegalArgumentException,
-    ValueError,
-} from './exceptions'
+import './PyInteger'
+import './PyFloat'
 
 
 /**
@@ -21,7 +14,7 @@ import {
  * See also PyType.js :: format (which this calls).
  * See also enable.js for shimming the global String prototype.
  */
-function format(st, ...args) {
+export function format(st, ...args) {
     if (st === undefined || st === null) {
         return st
     }
@@ -38,31 +31,12 @@ function format(st, ...args) {
  *     )
  *
  * This only needs to be called once per page.
+ * This is exported from the main library as `format.enableGlobal`
  */
-function enableGlobalFormat() {
+export function enableGlobal() {
     Object.defineProperty(String.prototype, 'format', {
         value: function (...args) {
             return format(this, ...args)
         },
     })
-}
-
-
-// default export
-export default format
-
-// named exports
-export {
-    format,
-    enableGlobalFormat,
-
-    // lower-level items
-    PyString,
-    PyInteger,
-    PyFloat,
-    MarkupIterator,
-    PyError,
-    FormatError,
-    IllegalArgumentException,
-    ValueError,
 }

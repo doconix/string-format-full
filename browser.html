@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>String-Format-Full Browser Use</title>
+    <script src="./dist/index.min.js"></script>
+    <style>
+        table {
+            border: 1px solid #CCC;
+            border-collapse: collapse;
+        }
+        td,th {
+            border: 1px solid #CCC;
+            padding: 5px 10px;
+        }
+    </style>
+    <script>
+        // enable 'st'.format(...)
+        format.enableGlobal()
+
+        // old-style code for compatability
+        function evalRow(code, result) {
+            document.write("<tr>")
+            document.write("<td>" + code + "</td>")
+            document.write("<td>" + result + "</td>")
+            document.write("</tr>")
+        }
+    </script>
+</head>
+<body>
+    <h1>Browser Example</h1>
+    <table border="1">
+        <tbody>
+            <tr>
+                <th>Code</th>
+                <th>Result</th>
+            </tr>
+            <script>evalRow("format('abc{}ghi', 'def')", format('abc{}ghi', 'def'))</script>
+            <script>evalRow("'abc{}ghi'.format('def')", 'abc{}ghi'.format('def'))</script>
+        </tbody>
+    </table>
+</body>
+</html>

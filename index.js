@@ -1,22 +1,12 @@
-import {format} from './src'
+import {format, enableGlobal} from './src'
+
+// format.enableGlobal
+Object.defineProperty(format, 'enableGlobal', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: enableGlobal,
+})
 
 // default export
 export default format
-
-// named exports
-export {
-    format,
-    enableGlobalFormat,
-} from './src'
-
-// named, lower-level exports
-export {
-    PyString,
-    PyInteger,
-    PyFloat,
-    MarkupIterator,
-    PyError,
-    FormatError,
-    IllegalArgumentException,
-    ValueError,
-} from './src'

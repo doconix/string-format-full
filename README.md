@@ -1,6 +1,6 @@
 # Description
 
-A full implementation of the Python formatting mini-language, built on Jython project.
+A full implementation of the Python formatting mini-language -- built by transcoding the official Jython code.
 
 Since Jython is a 20+ year-old codebase that has been tested and used throughout the world. This code has minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
 

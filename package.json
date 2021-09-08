@@ -1,6 +1,6 @@
 {
   "name": "string-format-full",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Python string formatting mini-language, transcoded from Jython. ",
   "main": "dist/index.min.js",
   "directories": {
@@ -28,9 +28,9 @@
   "homepage": "https://github.com/doconix/string-format-full#readme",
   "devDependencies": {
     "@babel/core": "^7.15.5",
-    "babel-loader": "^8.2.2",
     "@babel/preset-env": "^7.15.4",
     "babel-jest": "^27.1.1",
+    "babel-loader": "^8.2.2",
     "chai": "^4.3.4",
     "jest": "^27.1.1",
     "webpack": "^5.52.0",

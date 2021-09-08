@@ -30,6 +30,7 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.4",
     "babel-jest": "^27.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "chai": "^4.3.4",
     "jest": "^27.1.1",
     "webpack": "^5.52.0",

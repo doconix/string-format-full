@@ -3,8 +3,9 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        "targets": "defaults"
+        "targets": "defaults",
       }
     ],
   ],
+  "plugins": ["transform-class-properties"]
 }

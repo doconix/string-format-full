@@ -2,7 +2,7 @@
 
 A full implementation of the Python formatting mini-language -- built by transcoding the official Jython code.
 
-Since Jython is a 20+ year-old codebase that has been tested and used throughout the world. This code has minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
+Jython is a 20+ year-old codebase, and this module inherits much of its maturity. The code requires minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
 
 Minified size: `21kb`
 

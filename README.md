@@ -1,10 +1,10 @@
 # Description
 
-A full implementation of the Python formatting mini-language -- built by transcoding the official Jython code.
+A full implementation of the Python formatting mini-language -- built by transcoding the official Jython code with as few changes as possible.
 
 Jython is a 20+ year-old codebase, and this module inherits much of its maturity. The code requires minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
 
-Minified size: `21kb`
+This library is larger than alternatives, so its use case is projects that need formatting to exactly match the results of Python's str.format. Minified size is `21kb`.
 
 # Use
 

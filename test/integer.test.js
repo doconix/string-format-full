@@ -1,4 +1,4 @@
-import {format} from '../index'
+import format from '../index'
 import {assert} from 'chai'
 
 

@@ -19,7 +19,6 @@ export class PyError extends Error {
  * Adds convenience methods to match the Jython code.
  */
 export class FormatError extends PyError {
-
     /**
      * Convenience method returning a {@link Py#ValueError} reporting:
      * <p>
@@ -136,10 +135,6 @@ export class FormatError extends PyError {
 }
 
 
-/////////////////////////////////////////////
-///  Analogs for built-in Python exceptions
-///  Using explicit names so minifiers don't munch them.
-
 export class IllegalArgumentException extends PyError {
     constructor(message) {
         super('IllegalArgumentException', message)
@@ -149,5 +144,17 @@ export class IllegalArgumentException extends PyError {
 export class ValueError extends PyError {
     constructor(message) {
         super('ValueError', message)
+    }
+}
+
+export class IndexError extends PyError {
+    constructor(message) {
+        super('IndexError', message)
+    }
+}
+
+export class KeyError extends PyError {
+    constructor(message) {
+        super('KeyError', message)
     }
 }

@@ -1,6 +1,7 @@
+import { OPTIONS } from './options'
 import { FieldNameIterator } from './FieldNameIterator'
 import { MarkupIterator } from './MarkupIterator'
-import { ValueError } from './exceptions'
+import { IndexError, KeyError, ValueError } from './exceptions'
 
 
 /**
@@ -98,8 +99,22 @@ export class PyType {
                 // "{" [field_name] ["!" conversion] [":" format_spec] "}"
 
                 // Get the object referred to by the field name (which may be omitted).
-                let fieldObj = this.getFieldObject(chunk.fieldName, it.isBytes(), lookups);
-                // Python codes None to 'None'
+                let fieldObj
+                try {
+                    fieldObj = this.getFieldObject(chunk.fieldName, it.isBytes(), lookups);
+                }catch(err) {
+                    if (!OPTIONS.strict && (err.name === 'IndexError' || err.name === 'KeyError')) {
+                        // not in strict mode, so mock an empty string fieldObj
+                        chunk.formatSpec = null
+                        chunk.conversion = null
+                        chunk.formatSpecNeedsExpanding = null
+                        fieldObj = ''
+                    }else{
+                        throw err
+                    }
+                }
+
+                // adapt for JS
                 if (fieldObj === null) {
                     fieldObj = 'null';
                 }
@@ -139,9 +154,9 @@ export class PyType {
             obj = lookups[String(head)]
         }else{
             if (Number.isInteger(head)) {
-                throw new ValueError(`index out of range: ${head}`)
+                throw new IndexError(`index out of range: ${head}`)
             }else{
-                throw new ValueError(`named index not defined: ${head}`)
+                throw new KeyError(`name not defined: ${head}`)
             }
         }
 

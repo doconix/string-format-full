@@ -84,7 +84,7 @@ test('Missing name', () => {
             arg1: 'def',
             arg2: 'jkl',
         })
-    }, 'named index not defined: arg3')
+    }, 'name not defined: arg3')
 })
 
 test('Invalid index', () => {

@@ -4,7 +4,7 @@ A full implementation of the Python formatting mini-language -- built by transco
 
 Jython is a 20+ year-old codebase, and this module inherits much of its maturity. The code requires minimal changes to the original Jython because Java -> Javascript is a straightforward conversion. Kudos to the Jython team! https://www.jython.org/
 
-This library is larger than alternatives, so its use case is projects that need formatting to exactly match the results of Python's str.format. Minified size is `21kb`.
+This library is larger than alternatives, so its use case is projects that need formatting to exactly match the results of Python's str.format. Minified size is `22K`.
 
 # Use
 
@@ -47,13 +47,22 @@ format('{0[0].first} {0[0].second}', [
 If you prefer python-style:
 ```
 import format from 'string-format-full'
-
-// patch String.prototype (run at start of code)
-format.enableGlobal()
+format.setOptions({global: true})
 
 // "3.14"
 "{:0.2f}".format(3.141597)
 ```
+
+To allow missing values:
+```
+import format from 'string-format-full'
+format.setOptions({strict: false})
+
+// "Hello " with no error thrown for missing "World"
+"{} {}".format('Hello')
+```
+
+
 
 See `test/*` files for more examples.
 
@@ -65,9 +74,10 @@ See `browser.html`.
 # Benefits of this Approach
 
 1. Implements the full Python mini-language.
-2. Jython has seen 20+ years of significant use and testing.
-3. Unit tests in tests/.
-4. No dependencies.
+2. Python-style JS using the exact Python algorithms.
+3. Jython has seen 20+ years of significant use and testing.
+4. Unit tests in tests/.
+5. No dependencies.
 
 # Drawbacks of this Approach
 

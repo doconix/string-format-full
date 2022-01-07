@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>String-Format-Full Browser Use</title>
-    <script src="./dist/index.min.js"></script>
+    <title>String-Format-Full</title>
+    <script src="./dist/index.IE11.min.js"></script>
     <style>
         table {
             border: 1px solid #CCC;
@@ -14,9 +15,6 @@
         }
     </style>
     <script>
-        // enable 'st'.format(...)
-        format.enableGlobal()
-
         // old-style code for compatability
         function evalRow(code, result) {
             document.write("<tr>")
@@ -27,7 +25,31 @@
     </script>
 </head>
 <body>
-    <h1>Browser Example</h1>
+    <h1>String-Format-Full</h1>
+    <a href="https://www.npmjs.com/package/string-format-full">View this project on npmjs.org</a>
+    <h2>Use via NPM:</h2>
+    <ol>
+        <li>Install:<br/> <code>npm install string-format-full</code></li>
+        <li>Import:<br/>  <code>import format from "string-format-full"</code></li>
+        <li>Call:
+            <br/><code>const pi = format("{} is {:0.2f}", "Pi", 3.1415)</code>
+            <br/>or
+            <br/><code>format.setOptions({global: true})</code>
+            <br/><code>const pi = "{} is {:0.2f}".format("Pi", 3.1415)</code>
+        </li>
+    </ol>
+    <h2>Use Standalone:</h2>
+    <ol>
+        <li>Download:<br/> <a href="https://github.com/doconix/string-format-full/tree/main/dist">Grab a file</a></li>
+        <li>Include:<br/> <code>&lt;script src="index.IE11.min.js"&gt;&lt;/script&gt;</code></li>
+        <li>Call:
+            <br/><code>const pi = format("{} is {:0.2f}", "Pi", 3.1415)</code>
+            <br/>or
+            <br/><code>format.setOptions({global: true})</code>
+            <br/><code>const pi = "{} is {:0.2f}".format("Pi", 3.1415)</code>
+        </li>
+    </ol>
+    <h2>A few examples:</h2>
     <table border="1">
         <tbody>
             <tr>
@@ -35,7 +57,22 @@
                 <th>Result</th>
             </tr>
             <script>evalRow("format('abc{}ghi', 'def')", format('abc{}ghi', 'def'))</script>
-            <script>evalRow("'abc{}ghi'.format('def')", 'abc{}ghi'.format('def'))</script>
+            <script>evalRow("format('abc{}ghi{}mno{}', 'def', 'jkl', 42)", format('abc{}ghi{}mno{}', 'def', 'jkl', 42))</script>
+            <script>evalRow("format('abc{arg1}ghi{arg2}mno{arg3}', {arg1: 'def', arg2: 'jkl', arg3: 42})", format('abc{arg1}ghi{arg2}mno{arg3}', {arg1: 'def', arg2: 'jkl', arg3: 42}))</script>
+            <script>evalRow("format('X: {0[0]};  Y: {0[1]}', [3, 5])", format('X: {0[0]};  Y: {0[1]}', [3, 5]))</script>
+            <script>evalRow("format('{nest.first} {nest.second}', {nest:{'first': 111, 'second': 222}})", format('{nest.first} {nest.second}', {nest:{'first': 111, 'second': 222}}))</script>
+            <script>evalRow("format('{:e}', 3749.598)", format('{:e}', 3749.598))</script>
+            <script>evalRow("format('{:.2e}', 3749.598)", format('{:.2e}', 3749.598))</script>
+            <script>evalRow("format('{:.2f}', 101.4368)", format('{:.2f}', 101.4368))</script>
+            <script>evalRow("format('{:g}', 123456789.1234)", format('{:g}', 123456789.1234))</script>
+            <script>evalRow("format('{:.2%}', .12367)", format('{:.2%}', .12367))</script>
+            <script>evalRow("format('{:+d}', 3749)", format('{:+d}', 3749))</script>
+            <script>evalRow("format('{:+d}', -3749)", format('{:+d}', -3749))</script>
+            <script>evalRow("format('${: d}', 3749)", format('${: d}', 3749))</script>
+            <script>evalRow("format('{:c}', 3749)", format('{:c}', 3749))</script>
+            <script>evalRow("format('{:f}', 352)", format('{:f}', 352))</script>
+            <script>evalRow("format('abc{!s}ghi', 'def')", format('abc{!s}ghi', 'def'))</script>
+            <script>evalRow("format('abc{:^10}ghi', 'def')", format('abc{:^10}ghi', 'def'))</script>
         </tbody>
     </table>
 </body>

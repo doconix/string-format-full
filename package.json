@@ -1,13 +1,13 @@
 {
   "name": "string-format-full",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Python string formatting mini-language, transcoded from Jython. ",
-  "main": "index.js",
+  "main": "dist/index.ie11.min.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "node node_modules/jest/bin/jest.js",
+    "test": "BABEL_ENV=legacy node node_modules/jest/bin/jest.js test/*.js",
     "build": "BABEL_ENV=legacy node node_modules/webpack/bin/webpack.js && BABEL_ENV=legacy MINIFY_ENABLED=1 node node_modules/webpack/bin/webpack.js && BABEL_ENV=modern node node_modules/webpack/bin/webpack.js && BABEL_ENV=modern MINIFY_ENABLED=1 node node_modules/webpack/bin/webpack.js"
   },
   "repository": {

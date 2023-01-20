@@ -1377,7 +1377,20 @@ class MarkupIterator {
 
   };
 }
+;// CONCATENATED MODULE: ./src/util.js
+/**
+ * Thanks to https://github.com/sindresorhus/is-plain-obj/ for this function
+ */
+function isPlainObject(value) {
+  if (typeof value !== 'object' || value === null) {
+    return false;
+  }
+
+  const prototype = Object.getPrototypeOf(value);
+  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
+}
 ;// CONCATENATED MODULE: ./src/PyType.js
+
 
 
 
@@ -1426,18 +1439,16 @@ class PyType {
 
 
   parseArgs(...args) {
-    let idx = 0;
+    // if a single arg, and that arg is plain object, then assume a dict of key=value pairs
+    if (args.length === 1 && isPlainObject(args[0])) {
+      return args[0];
+    } // go with positional args (switch keys to strings)
+
+
     const lookups = {};
 
-    for (const arg of args) {
-      if (!Array.isArray(arg) && typeof arg === 'object' && arg !== null) {
-        // arg is object, so extend into lookups
-        Object.assign(lookups, arg);
-      } else {
-        // arg is some other type, so make it an indexed item
-        lookups[String(idx)] = arg;
-        idx += 1;
-      }
+    for (let i = 0; i < args.length; i++) {
+      lookups[String(i)] = args[i];
     }
 
     return lookups;

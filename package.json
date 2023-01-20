@@ -1,6 +1,6 @@
 {
   "name": "string-format-full",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Python string formatting mini-language, transcoded from Jython. ",
   "main": "dist/index.ie11.min.js",
   "directories": {

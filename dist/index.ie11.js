@@ -2542,6 +2542,20 @@ _defineProperty(MarkupIterator, "Chunk", /*#__PURE__*/function () {
 
   return _createClass(_class2);
 }());
+;// CONCATENATED MODULE: ./src/util.js
+
+
+/**
+ * Thanks to https://github.com/sindresorhus/is-plain-obj/ for this function
+ */
+function isPlainObject(value) {
+  if (_typeof(value) !== 'object' || value === null) {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(value);
+  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
+}
 ;// CONCATENATED MODULE: ./src/PyType.js
 
 
@@ -2598,24 +2612,16 @@ var PyType = /*#__PURE__*/function () {
   }, {
     key: "parseArgs",
     value: function parseArgs() {
-      var idx = 0;
+      // if a single arg, and that arg is plain object, then assume a dict of key=value pairs
+      if (arguments.length === 1 && isPlainObject(arguments.length <= 0 ? undefined : arguments[0])) {
+        return arguments.length <= 0 ? undefined : arguments[0];
+      } // go with positional args (switch keys to strings)
+
+
       var lookups = {};
 
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      for (var _i = 0, _args = args; _i < _args.length; _i++) {
-        var arg = _args[_i];
-
-        if (!Array.isArray(arg) && _typeof(arg) === 'object' && arg !== null) {
-          // arg is object, so extend into lookups
-          Object.assign(lookups, arg);
-        } else {
-          // arg is some other type, so make it an indexed item
-          lookups[String(idx)] = arg;
-          idx += 1;
-        }
+      for (var i = 0; i < arguments.length; i++) {
+        lookups[String(i)] = i < 0 || arguments.length <= i ? undefined : arguments[i];
       }
 
       return lookups;

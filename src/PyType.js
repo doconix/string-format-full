@@ -2,7 +2,7 @@ import { OPTIONS } from './options'
 import { FieldNameIterator } from './FieldNameIterator'
 import { MarkupIterator } from './MarkupIterator'
 import { IndexError, KeyError, ValueError } from './exceptions'
-
+import { isPlainObject } from './util'
 
 /**
  * Jython implements classes for the various types: PyString, PyInteger, PyLong, PyFloat, etc.
@@ -44,18 +44,14 @@ export class PyType {
      * because they are in a single object rather than two.
      */
     parseArgs(...args) {
-        let idx = 0
+        // if a single arg, and that arg is plain object, then assume a dict of key=value pairs
+        if (args.length === 1 && isPlainObject(args[0])) {
+            return args[0]
+        }
+        // go with positional args (switch keys to strings)
         const lookups = {}
-        for (const arg of args) {
-            if (!Array.isArray(arg) && typeof arg === 'object' && arg !== null) {
-                // arg is object, so extend into lookups
-                Object.assign(lookups, arg)
-
-            }else{
-                // arg is some other type, so make it an indexed item
-                lookups[String(idx)] = arg
-                idx += 1
-            }
+        for (let i = 0; i < args.length; i++) {
+            lookups[String(i)] = args[i]
         }
         return lookups
     }

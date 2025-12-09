@@ -5,6 +5,7 @@
 import { InternalFormat } from './InternalFormat.js'
 import { FormatError } from './exceptions'
 
+
 /**
  * A class that provides the implementation of floating-point formatting. In a limited way, it acts
  * like a StringBuilder to which text and one or more numbers may be appended, formatted according
@@ -249,13 +250,11 @@ export class FloatFormatter extends InternalFormat.Formatter {
         let exp = 0;
 
         if (!this.signAndSpecialNumber(value, positivePrefix)) {
-            value = Math.abs(Number(value))
-            let scinum = value.toExponential()
-            let coef
-            [coef, exp] = scinum.split('e+');   // abs value, so we know it's +
-            coef = Number(coef).toFixed(precision)
-            exp = Number(exp)
-            let [coefInt, coefDec] = `${coef}.`.split('.', 2);
+            value = Math.abs(Number(value));
+            let scinum = value.toExponential(precision);
+            let match = scinum.match(/(.+)e([+-].+)/);
+            let [coefInt, coefDec] = `${match[1]}.`.split('.', 2);
+            exp = Number(match[2]);
 
             // Take explicit control in order to get exponential notation out of BigDecimal.
             let digits = coefInt + coefDec
@@ -433,17 +432,19 @@ export class FloatFormatter extends InternalFormat.Formatter {
             this.zeroHelper(precision, expThreshold);
 
         } else {
-
             // Convert abs(value) to decimal with p digits of accuracy.
             value = Math.abs(Number(value))
 
             // This gives us the digits we need for either fixed or exponential format.
             let [coefInt, coefDec] = `${value}.`.split('.', 2);
             let pointlessDigits = coefInt + coefDec;
+            pointlessDigits = parseInt(pointlessDigits).toString()  // remove any leading zeros
 
-            let scinum = value.toExponential()
-            let [, exp] = scinum.split('e+');
-            exp = parseInt(exp)
+            // If we were to complete this as e-format, the exponent would be:
+            let scinum = value.toExponential(precision);
+            let match = scinum.match(/(.+)e([+-].+)/);
+            let exp = Number(match[2]);
+
             if (-4 <= exp && exp < expThreshold) {
                 // Finish the job as f-format with variable-precision p-(exp+1).
                 this.appendFixed(pointlessDigits, exp, precision);
@@ -513,7 +514,6 @@ export class FloatFormatter extends InternalFormat.Formatter {
      * @param precision of conversion (number of significant digits).
      */
     appendFixed(digits, exp, precision) {
-
         // Check for "alternate format", where we won't economise trailing zeros.
         let noTruncate = (this.minFracDigits < 0);
 

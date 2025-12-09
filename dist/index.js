@@ -2045,13 +2045,10 @@ class FloatFormatter extends InternalFormat.Formatter {
 
     if (!this.signAndSpecialNumber(value, positivePrefix)) {
       value = Math.abs(Number(value));
-      let scinum = value.toExponential();
-      let coef;
-      [coef, exp] = scinum.split('e+'); // abs value, so we know it's +
-
-      coef = Number(coef).toFixed(precision);
-      exp = Number(exp);
-      let [coefInt, coefDec] = `${coef}.`.split('.', 2); // Take explicit control in order to get exponential notation out of BigDecimal.
+      let scinum = value.toExponential(precision);
+      let match = scinum.match(/(.+)e([+-].+)/);
+      let [coefInt, coefDec] = `${match[1]}.`.split('.', 2);
+      exp = Number(match[2]); // Take explicit control in order to get exponential notation out of BigDecimal.
 
       let digits = coefInt + coefDec;
       let digitCount = digits.length;
@@ -2232,9 +2229,12 @@ class FloatFormatter extends InternalFormat.Formatter {
 
       let [coefInt, coefDec] = `${value}.`.split('.', 2);
       let pointlessDigits = coefInt + coefDec;
-      let scinum = value.toExponential();
-      let [, exp] = scinum.split('e+');
-      exp = parseInt(exp);
+      pointlessDigits = parseInt(pointlessDigits).toString(); // remove any leading zeros
+      // If we were to complete this as e-format, the exponent would be:
+
+      let scinum = value.toExponential(precision);
+      let match = scinum.match(/(.+)e([+-].+)/);
+      let exp = Number(match[2]);
 
       if (-4 <= exp && exp < expThreshold) {
         // Finish the job as f-format with variable-precision p-(exp+1).

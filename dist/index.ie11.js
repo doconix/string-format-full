@@ -3412,24 +3412,15 @@ var FloatFormatter = /*#__PURE__*/function (_InternalFormat$Forma) {
 
       if (!this.signAndSpecialNumber(value, positivePrefix)) {
         value = Math.abs(Number(value));
-        var scinum = value.toExponential();
-        var coef;
+        var scinum = value.toExponential(precision);
+        var match = scinum.match(/(.+)e([+-].+)/);
 
-        var _scinum$split = scinum.split('e+');
-
-        var _scinum$split2 = _slicedToArray(_scinum$split, 2);
-
-        coef = _scinum$split2[0];
-        exp = _scinum$split2[1];
-        // abs value, so we know it's +
-        coef = Number(coef).toFixed(precision);
-        exp = Number(exp);
-
-        var _$split = "".concat(coef, ".").split('.', 2),
+        var _$split = "".concat(match[1], ".").split('.', 2),
             _$split2 = _slicedToArray(_$split, 2),
             coefInt = _$split2[0],
-            coefDec = _$split2[1]; // Take explicit control in order to get exponential notation out of BigDecimal.
+            coefDec = _$split2[1];
 
+        exp = Number(match[2]); // Take explicit control in order to get exponential notation out of BigDecimal.
 
         var digits = coefInt + coefDec;
         var digitCount = digits.length;
@@ -3620,13 +3611,12 @@ var FloatFormatter = /*#__PURE__*/function (_InternalFormat$Forma) {
             coefDec = _$split6[1];
 
         var pointlessDigits = coefInt + coefDec;
-        var scinum = value.toExponential();
+        pointlessDigits = parseInt(pointlessDigits).toString(); // remove any leading zeros
+        // If we were to complete this as e-format, the exponent would be:
 
-        var _scinum$split3 = scinum.split('e+'),
-            _scinum$split4 = _slicedToArray(_scinum$split3, 2),
-            exp = _scinum$split4[1];
-
-        exp = parseInt(exp);
+        var scinum = value.toExponential(precision);
+        var match = scinum.match(/(.+)e([+-].+)/);
+        var exp = Number(match[2]);
 
         if (-4 <= exp && exp < expThreshold) {
           // Finish the job as f-format with variable-precision p-(exp+1).

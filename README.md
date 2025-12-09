@@ -66,6 +66,23 @@ format.setOptions({strict: false})
 
 See `test/*` files for more examples.
 
+# Testing
+
+Run all tests:
+```
+$ yarn test
+ PASS  test/float.test.js
+ PASS  test/integer.test.js
+ PASS  test/types.test.js
+ PASS  test/arguments.test.js
+ PASS  test/options.test.js
+ PASS  test/text.test.js
+ PASS  test/format.test.js
+
+Test Suites: 7 passed, 7 total
+Tests:       85 passed, 85 total
+```
+
 ## Browser-based &lt;script src="..."&gt;
 
 See `browser.html`.

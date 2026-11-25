@@ -1,5 +1,6 @@
-import format from '../index'
-import {assert} from 'chai'
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import format from '../src/index.js'
 
 
 // basic
@@ -133,7 +134,7 @@ test('Generic integer', () => {
 
 test('Generic long', () => {
     const st = format('{:g}', 123456789)
-    assert.equal('1.23456789e+08', st)
+    assert.equal('1.23457e+08', st)
 })
 
 

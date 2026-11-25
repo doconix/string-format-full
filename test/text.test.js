@@ -1,5 +1,6 @@
-import format from '../index'
-import {assert} from 'chai'
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import format from '../src/index.js'
 
 
 ///  basic  ///

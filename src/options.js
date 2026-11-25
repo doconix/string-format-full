@@ -1,12 +1,11 @@
-
-// options that configure the string-format-full library
-// this is in its own file so we can use anywhere without circular imports
+/**
+ * Library-wide options, changed through format.setOptions().
+ */
 export const OPTIONS = {
-    global: false,  // If changed to true, enables 'mystr'.format(...) on the global String type:
-    // ex: "{} is a favorite color".format('blue')
+    // true adds a format method to every string: "{} is a color".format('blue')
+    global: false,
 
-    strict: true,   // If changed to false, allows missing field indexes or names.
-    // The default is to throw ValueErrors when fields are missing (following Python here).
-    // ex: "{} is a favorite {}".format('blue')     // note second field is missing in args
-    // ex: "{color} is a favorite color".format({}) // note missing field named `color`
+    // false renders a missing argument as an empty string rather than raising, as Python does,
+    // IndexError or KeyError: "{} is a {}".format('blue') gives "blue is a "
+    strict: true,
 }
